@@ -1,0 +1,30 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/OpenOnlineConfig
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Authors>database64128</Authors>
+    <Product>OpenOnlineConfig.NET</Product>
+    <Description>.NET class library for Open Online Config (OOC) support.</Description>
+    <Copyright>© 2021 database64128</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <PackageTags>open-online-config;censorship-circumvention</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

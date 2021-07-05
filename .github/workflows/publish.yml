@@ -1,0 +1,23 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish_upload:
+    name: Publish NuGet Package
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/OpenOnlineConfig
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Pack and upload NuGet package
+        run: |
+          dotnet pack OpenOnlineConfig -c Release
+          dotnet nuget push OpenOnlineConfig/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
