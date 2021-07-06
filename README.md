@@ -1,6 +1,8 @@
 # `OpenOnlineConfig.NET`
 
-![Nuget](https://img.shields.io/nuget/v/OpenOnlineConfig)
+[![Nuget](https://img.shields.io/nuget/v/OpenOnlineConfig)](https://www.nuget.org/packages/OpenOnlineConfig/)
+[![Build & Test](https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET/actions/workflows/build.yml/badge.svg)](https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET/actions/workflows/build.yml)
+[![Publish NuGet Package](https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET/actions/workflows/publish.yml/badge.svg)](https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET/actions/workflows/publish.yml)
 
 `OpenOnlineConfig.NET` is a .NET class library for Open Online Config (OOC) support.
 
