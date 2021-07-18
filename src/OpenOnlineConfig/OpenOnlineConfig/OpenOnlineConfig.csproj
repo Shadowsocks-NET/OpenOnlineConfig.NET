@@ -12,6 +12,8 @@
     <RepositoryUrl>https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET</RepositoryUrl>
     <RepositoryType>Public</RepositoryType>
     <PackageTags>open-online-config;censorship-circumvention</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
