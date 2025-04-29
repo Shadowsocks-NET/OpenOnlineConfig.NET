@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OpenOnlineConfig.v1
+﻿namespace OpenOnlineConfig.v1
 {
     /// <summary>
     /// OOCv1 API access information.

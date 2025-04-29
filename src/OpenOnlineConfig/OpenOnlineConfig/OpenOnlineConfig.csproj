@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Authors>database64128</Authors>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Authors>database64128</Authors>
     <Product>OpenOnlineConfig.NET</Product>
     <Description>.NET class library for Open Online Config (OOC) support.</Description>
     <Copyright>© 2025 database64128</Copyright>
