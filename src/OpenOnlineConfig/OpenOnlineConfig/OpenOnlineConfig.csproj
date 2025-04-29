@@ -6,7 +6,7 @@
     <Authors>database64128</Authors>
     <Product>OpenOnlineConfig.NET</Product>
     <Description>.NET class library for Open Online Config (OOC) support.</Description>
-    <Copyright>© 2022 database64128</Copyright>
+    <Copyright>© 2025 database64128</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Shadowsocks-NET/OpenOnlineConfig.NET</RepositoryUrl>
@@ -14,7 +14,7 @@
     <PackageTags>open-online-config;censorship-circumvention</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>CS1591</NoWarn>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

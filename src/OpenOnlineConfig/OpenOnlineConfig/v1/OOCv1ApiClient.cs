@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Security;
+using System.Net.Http.Json;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,8 +13,9 @@ namespace OpenOnlineConfig.v1
     /// </summary>
     public class OOCv1ApiClient : IDisposable
     {
-        protected readonly OOCv1ApiToken _apiToken;
         protected readonly HttpClient _httpClient;
+        private readonly Uri _uri;
+        private readonly bool _disposeHttpClient;
         private bool disposedValue;
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace OpenOnlineConfig.v1
         /// <param name="httpClient">Supply an existing HttpClient instance.</param>
         public OOCv1ApiClient(OOCv1ApiToken apiToken, HttpClient? httpClient = null)
         {
-            _apiToken = apiToken;
+            _uri = apiToken.UserUrl;
 
             if (apiToken.CertSha256 is null)
             {
@@ -37,14 +38,17 @@ namespace OpenOnlineConfig.v1
                 {
                     SslOptions = new()
                     {
-                        RemoteCertificateValidationCallback = ValidateServerCertificate,
+                        RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                        {
+                            string? sha256Fingerprint = certificate?.GetCertHashString(HashAlgorithmName.SHA256);
+                            return string.Equals(apiToken.CertSha256, sha256Fingerprint, StringComparison.OrdinalIgnoreCase);
+                        },
                     },
                 };
 
                 _httpClient = new(socketsHttpHandler);
+                _disposeHttpClient = true;
             }
-
-            _httpClient.Timeout = TimeSpan.FromSeconds(30.0);
         }
 
         /// <inheritdoc cref="HttpClient.Timeout"/>
@@ -54,15 +58,9 @@ namespace OpenOnlineConfig.v1
             set => _httpClient.Timeout = value;
         }
 
-        private bool ValidateServerCertificate(object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors)
-        {
-            var sha256Fingerprint = certificate?.GetCertHashString(HashAlgorithmName.SHA256);
-            return string.Equals(_apiToken.CertSha256, sha256Fingerprint, StringComparison.OrdinalIgnoreCase);
-        }
-
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (_disposeHttpClient && !disposedValue)
             {
                 if (disposing)
                 {
@@ -80,11 +78,12 @@ namespace OpenOnlineConfig.v1
         }
 
         /// <summary>
-        /// Retrieves the online config and returns the response JSON as a string in an asynchronous operation.
+        /// Retrieves the online config and deserializes the response JSON as <typeparamref name="TValue"/> in an asynchronous operation.
         /// </summary>
+        /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
         /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
-        /// <returns>The task object representing the asynchronous operation.</returns>
-        public Task<string> GetAsync(CancellationToken cancellationToken = default)
-            => _httpClient.GetStringAsync($"{_apiToken.BaseUrl}/{_apiToken.Secret}/ooc/v1/{_apiToken.UserId}", cancellationToken);
+        /// <returns>The <see cref="Task"/> object representing the asynchronous operation.</returns>
+        public Task<TValue?> GetAsync<TValue>(JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken = default) where TValue : OOCv1ConfigBase =>
+            _httpClient.GetFromJsonAsync(_uri, jsonTypeInfo, cancellationToken);
     }
 }

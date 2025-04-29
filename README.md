@@ -18,14 +18,14 @@
 
 ``` cs
 // Serialize an API token.
-var token = new OOCv1ApiToken(1, "https://example.com", "8c1da4d8-8684-4a2c-9abb-57b9d5fa7e52", "a117460e-41df-4dbd-b2df-4bd0c16efd2f", null);
-var json = JsonSerializer.Serialize(token, JsonHelper.camelCaseMinifiedJsonSerializerOptions);
+OOCv1ApiToken token = new(1, "https://example.com", "8c1da4d8-8684-4a2c-9abb-57b9d5fa7e52", "a117460e-41df-4dbd-b2df-4bd0c16efd2f", null);
+string json = JsonSerializer.Serialize(token, OOCv1JsonSerializerContext.Default.OOCv1ApiToken);
 ```
 
 ``` cs
 // Deserialize an API token.
-var json = "{\"version\":1,\"baseUrl\":\"https://example.com\",\"secret\":\"8c1da4d8-8684-4a2c-9abb-57b9d5fa7e52\",\"userId\":\"a117460e-41df-4dbd-b2df-4bd0c16efd2f\"}";
-var token = JsonSerializer.Deserialize<OOCv1ApiToken>(json, JsonHelper.camelCaseJsonDeserializerOptions);
+string json = "{\"version\":1,\"baseUrl\":\"https://example.com\",\"secret\":\"8c1da4d8-8684-4a2c-9abb-57b9d5fa7e52\",\"userId\":\"a117460e-41df-4dbd-b2df-4bd0c16efd2f\"}";
+OOCv1ApiToken? token = JsonSerializer.Deserialize(json, OOCv1JsonSerializerContext.Default.OOCv1ApiToken);
 ```
 
 ### 2. Config Base
@@ -34,9 +34,7 @@ var token = JsonSerializer.Deserialize<OOCv1ApiToken>(json, JsonHelper.camelCase
 
 ### 3. API Client
 
-`OOCv1ApiClient` is the general-purpose OOCv1 API client. Use this if you want to handle the response JSON yourself.
-
-`OOCv1ApiClient<T>` is the generic OOCv1 API client. Use this if you have specific protocols in mind. `T` must be a subclass of `OOCv1ConfigBase`.
+`OOCv1ApiClient` is the general-purpose OOCv1 API client. Call `GetAsync<TValue>` to retrieve the online config. `TValue` must be a subclass of `OOCv1ConfigBase`.
 
 ## License
 

@@ -40,6 +40,6 @@ namespace OpenOnlineConfig.v1
         /// <summary>
         /// Gets or sets the protocols used in the configuration.
         /// </summary>
-        public List<string> Protocols { get; set; } = new();
+        public List<string> Protocols { get; set; } = [];
     }
 }
