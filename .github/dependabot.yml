@@ -4,4 +4,8 @@ updates:
   directory: "src/OpenOnlineConfig"
   schedule:
     interval: daily
-  open-pull-requests-limit: 16
+
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
