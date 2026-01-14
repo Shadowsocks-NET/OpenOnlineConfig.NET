@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.1" />
+    <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.2" />
   </ItemGroup>
 
 </Project>
