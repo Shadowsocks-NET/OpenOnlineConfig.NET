@@ -11,6 +11,6 @@
     <File Path=".github/workflows/build.yml" />
     <File Path=".github/workflows/publish.yml" />
   </Folder>
-  <Project Path="src/OpenOnlineConfig.Tests/OpenOnlineConfig.Tests.csproj" />
   <Project Path="src/OpenOnlineConfig/OpenOnlineConfig.csproj" />
+  <Project Path="tests/OpenOnlineConfig.Tests/OpenOnlineConfig.Tests.csproj" />
 </Solution>

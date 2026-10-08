@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenOnlineConfig\OpenOnlineConfig.csproj" />
+    <ProjectReference Include="..\..\src\OpenOnlineConfig\OpenOnlineConfig.csproj" />
   </ItemGroup>
 
 </Project>
